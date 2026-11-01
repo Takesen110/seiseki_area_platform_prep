@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>聖蹟桜ヶ丘を、3Dで語ろう｜カワマチオープンデー出展企画 v0.8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf6ee; --surface:#ffffff; --ink:#2b2a28; --muted:#6b665e; --line:#e6dccb;
+  --accent:#e2702b; --accent-soft:#fbe3d1; --sky:#3b9cc4; --sky-soft:#dcf0f7; --pink:#d9467e; --pink-soft:#fbe0eb;
+  --hl:rgba(226,112,43,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1c1b19; --surface:#262522; --ink:#f0ebe2; --muted:#b3ab9e; --line:#3d3a35;
+    --accent:#f0894a; --accent-soft:#3d2a1d; --sky:#6cc0e2; --sky-soft:#1d3239; --pink:#ee6c9c; --pink-soft:#3a2230;
+    --hl:rgba(240,137,74,.30);
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  line-height:1.8;font-size:16px;
+  overflow-x:hidden;overflow-wrap:break-word;word-wrap:break-word;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+p,div,span,li,td,th,a,strong,em,h1,h2,h3,h4{overflow-wrap:break-word;word-wrap:break-word}
+a{color:var(--sky)}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:"Noto Serif JP",serif;line-height:1.4}
+.en{font-family:"Cormorant Garamond",serif;letter-spacing:.08em}
+mark{background:linear-gradient(transparent 55%,var(--hl) 55%);color:inherit;padding:0 2px}
+
+.cover{padding:56px 0 48px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;right:-90px;top:-90px;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,var(--sky-soft),transparent 70%);z-index:0}
+.cover>*{position:relative;z-index:1}
+.ver{position:absolute;top:20px;right:24px;font-size:12px;color:var(--muted);z-index:2}
+.cover .kicker{color:var(--accent);font-size:14px;font-weight:700;letter-spacing:.1em}
+.cover h1{font-size:40px;margin:12px 0 8px}
+.cover .sub{font-size:17px;color:var(--muted);margin:0 0 28px}
+.cover-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cover-info>div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-width:0}
+.cover-info .k{font-size:12px;color:var(--muted)}
+.cover-info .v{font-weight:700}
+
+.glance{margin:40px 0;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:20px 24px}
+.glance .row{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.glance .row:last-child{border-bottom:none}
+.glance .row>*{min-width:0}
+.glance .lab{color:var(--accent);font-weight:600;font-size:20px}
+
+section{padding:40px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+.sec-head>*{min-width:0}
+.sec-no{font-size:34px;color:var(--accent)}
+.sec-head h2{font-size:24px;margin:0}
+.lead{color:var(--muted)}
+
+.whatwedo{background:var(--accent-soft);border-radius:12px;padding:20px 24px;margin:16px 0 24px}
+.whatwedo h3{margin:0 0 6px;font-size:18px}
+.whatwedo p{margin:0}
+
+.goals{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.goals li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:32px 1fr;gap:10px}
+.goals li>*{min-width:0}
+.goals .n{font-weight:700;color:var(--accent);font-family:"Cormorant Garamond",serif;font-size:22px;line-height:1.3}
+.goals .star{border-color:var(--accent)}
+
+.flow-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px;margin:16px 0 6px}
+.flow-scroll svg{display:block;width:100%;min-width:640px;height:auto}
+.hint{font-size:12px;color:var(--muted)}
+
+.steps{display:grid;gap:12px;margin-top:20px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:110px 1fr;gap:14px}
+.step>*{min-width:0}
+.step .tag{font-size:12px;font-weight:700;color:#fff;background:var(--sky);border-radius:999px;padding:2px 10px;display:inline-block}
+.step .tag.h{background:var(--pink)}
+.step .tag.c{background:var(--accent)}
+.step .place{font-size:13px;color:var(--muted);margin-top:6px}
+.step h3{margin:0 0 4px;font-size:17px}
+.step p{margin:0;font-size:15px}
+.step .who{font-size:13px;color:var(--muted);margin-top:6px}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.split>div{border-radius:12px;padding:14px 18px;min-width:0}
+.split .kid{background:var(--sky-soft)}
+.split .par{background:var(--pink-soft)}
+.split b{display:block;margin-bottom:4px}
+
+.note{font-size:14px;color:var(--muted);background:var(--sky-soft);border-radius:10px;padding:12px 16px;margin-top:16px}
+
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:10px;overflow:hidden;font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft);font-weight:700;font-size:14px}
+.blank{color:var(--muted)}
+
+.dest{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dest>div{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:10px;padding:14px 16px;min-width:0}
+.dest .d{font-size:13px;color:var(--muted)}
+.dest h3{font-size:17px;margin:2px 0 6px}
+.dest .for{font-size:13px;font-weight:700;margin-bottom:4px}
+.dest p{margin:0 0 6px;font-size:14px}
+.dest .how{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 10px;margin-bottom:6px}
+.how.flyer{background:var(--pink);color:#fff}
+.how.site{background:var(--sky);color:#fff}
+.dest a{font-size:13px;word-break:break-all}
+.dest .p1{border-top-color:var(--pink)} .dest .p2{border-top-color:var(--sky)} .dest .p3{border-top-color:var(--accent)} .dest .p4{border-top-color:var(--ink)}
+
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.tools>div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.tools .dev{font-size:12px;color:var(--muted)}
+.tools h3{margin:2px 0 6px;font-size:18px}
+.tools p{margin:0 0 6px;font-size:14px}
+.tools .use{font-size:13px;font-weight:700;color:var(--accent)}
+.video{position:relative;width:100%;aspect-ratio:16/9;margin-top:16px;border-radius:12px;overflow:hidden;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.relation{background:var(--accent-soft);border-radius:12px;padding:14px 18px;margin-top:12px;font-size:15px}
+.links{margin:12px 0 0;padding-left:20px;font-size:14px}
+.links li{margin:4px 0}
+.check{list-style:none;padding:0;margin:0;columns:2;column-gap:24px}
+.check li{break-inside:avoid;padding:4px 0 4px 26px;position:relative}
+.check li::before{content:"";position:absolute;left:0;top:10px;width:14px;height:14px;border:2px solid var(--accent);border-radius:3px}
+.cat{font-weight:700;margin:20px 0 8px;font-size:15px;color:var(--accent)}
+
+.talk{display:grid;gap:10px}
+.talk div{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.talk .s{font-size:12px;color:var(--muted);display:block}
+
+.open{display:grid;gap:10px}
+.open div{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--pink);border-radius:8px;padding:10px 14px}
+.open b{display:block}
+
+footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--muted)}
+
+@media (max-width:768px){
+  .cover h1{font-size:32px}
+  .cover-info{grid-template-columns:1fr 1fr}
+  .check{columns:1}
+  .dest,.split,.tools{grid-template-columns:1fr}
+  strong,em,a,span,p,div,li,td,th{word-break:normal;overflow-wrap:break-word}
+  .dest a{word-break:break-all}
+  .resp thead{display:none}
+  .resp tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}
+  .resp td{display:block;border:none;padding:4px 12px}
+  .resp td::before{content:attr(data-l);display:block;font-size:12px;color:var(--muted)}
+}
+@media (max-width:480px){
+  .wrap{padding:0 16px}
+  .cover{padding:44px 0 36px}
+  .cover h1{font-size:27px}
+  .cover-info{grid-template-columns:1fr}
+  .step{grid-template-columns:1fr;gap:6px}
+  .glance .row{grid-template-columns:1fr;gap:2px}
+  .sec-head h2{font-size:21px}
+}
+</style>
+</head>
+<body>
+
+<div class="cover"><div class="wrap">
+  <div class="ver en">Draft v0.8</div>
+  <div class="kicker">せいせきカワマチ オープンデー 出展企画｜スタッフ向け</div>
+  <h1>聖蹟桜ヶ丘を、<br>3Dで語ろう。</h1>
+  <p class="sub">3DデジタルマップとXR体験で、まちの魅力を語り合い、新しい友だちができる一日</p>
+  <div class="cover-info">
+    <div><div class="k">日時</div><div class="v">2026/11/8（日）10:00–15:30</div></div>
+    <div><div class="k">場所</div><div class="v">多摩川河川敷芝生広場（せいせきカワマチ）</div></div>
+    <div><div class="k">出展</div><div class="v">聖蹟桜ヶ丘エリアプラットフォーム準備会</div></div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+<div class="glance">
+  <div class="row"><div class="lab en">WHAT</div><div>iPadとPCでtorinomeを使い、聖蹟桜ヶ丘を上から俯瞰したり、まちの中に立つ目線で見たり、様々な視点から眺めて、活動を置いて、思い出を語り合う体験ブース</div></div>
+  <div class="row"><div class="lab en">WHY</div><div>来年度のエリプラ正式発足に向けて、まちを使って何かやってみたい機運を高める。まずは<mark>自分たちが楽しみ、新しい友だちをつくる</mark>。その結果つながりが生まれ、もっと楽しいまちになる。3Dはそのためのメディア</div></div>
+  <div class="row"><div class="lab en">HOW</div><div>外で声をかけて体験に誘い、テント内で体験とヒアリング。出口でアンケートと次のイベントを案内</div></div>
+</div>
+
+<!-- 01 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">01</span><h2>この日やること</h2></div>
+  <div class="whatwedo">
+    <h3>3Dを囲んで、まちのことを語り合い、新しい友だちをつくる</h3>
+    <p>スタッフのみんなも、来場者と一緒に楽しんでください。この日に生まれた出会いが、<mark>次のイベントでの再会や、まちでの新しい取り組みにつながっていけば十分</mark>です。3Dは、そのきっかけをつくるメディアです。</p>
+  </div>
+  <ul class="goals">
+    <li class="star"><span class="n">1</span><div><b>自分たちが楽しみ、新しい友だちをつくる</b><br>スタッフも来場者も、まちの話で盛り上がって、知り合いが増える一日にする</div></li>
+    <li><span class="n">2</span><div><b>まちを使ってやってみたい機運を高める</b><br>エリプラ準備会が来年度に正式発足し、まちを使った活動を後押しする場になることを知ってもらう</div></li>
+    <li><span class="n">3</span><div><b>3Dを、まちを語るメディアとして楽しんでもらう</b><br>俯瞰や主観など様々な視点でまちを眺め、torinomeの使い道に関心を持ってもらう</div></li>
+    <li><span class="n">4</span><div><b>まちのイメージや思い出を語ってもらう</b><br>昔の写真をきっかけに、まちへの愛着や記憶を引き出す</div></li>
+    <li><span class="n">5</span><div><b>準備会のアンケートに答えてもらう</b><br>パネルアンケートと、やってみたいことを書く種アンケート。書きたい人には次の接点も案内する</div></li>
+  </ul>
+</section>
+
+<!-- 02 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">02</span><h2>ブースの流れ</h2></div>
+  <p class="lead">外で勧誘し、テントの中で体験とヒアリング、出口でクロージングして退出してもらいます。ヒアリングの一部のパネルアンケートは、石塚計画デザイン事務所が担当します。</p>
+  <div class="flow-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif">
+  <defs><marker id="bar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4a4540"/></marker></defs>
+  <rect width="960" height="300" fill="#fbf6ee"/>
+  <rect x="10" y="30" width="200" height="260" rx="10" fill="#eef7fa"/>
+  <text x="110" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#1f5f78">テントの外</text>
+  <rect x="35" y="110" width="150" height="80" rx="8" fill="#3b9cc4"/>
+  <text x="110" y="144" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">勧誘</text>
+  <text x="110" y="168" text-anchor="middle" font-size="12" fill="#ffffff">iPadで声かけ・体験</text>
+  <rect x="232" y="30" width="608" height="260" rx="10" fill="#ffffff" stroke="#e2702b" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="536" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#8a3e10">テント</text>
+  <rect x="255" y="110" width="150" height="80" rx="8" fill="#3b9cc4"/>
+  <text x="330" y="144" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">体験</text>
+  <text x="330" y="168" text-anchor="middle" font-size="12" fill="#ffffff">iPadで活動を置く</text>
+  <rect x="435" y="74" width="200" height="196" rx="8" fill="#fbe0eb" stroke="#d9467e" stroke-width="2"/>
+  <text x="535" y="100" text-anchor="middle" font-size="17" font-weight="700" fill="#8a2350">ヒアリング</text>
+  <rect x="450" y="114" width="170" height="54" rx="6" fill="#d9467e"/>
+  <text x="535" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">思い出を語る</text>
+  <text x="535" y="157" text-anchor="middle" font-size="11" fill="#ffffff">PCで昔の写真を見ながら</text>
+  <rect x="450" y="180" width="170" height="76" rx="6" fill="#ffffff" stroke="#d9467e"/>
+  <text x="535" y="204" text-anchor="middle" font-size="13" font-weight="700" fill="#8a2350">パネルアンケート</text>
+  <text x="535" y="224" text-anchor="middle" font-size="11" fill="#8a2350">担当：</text>
+  <text x="535" y="242" text-anchor="middle" font-size="11" fill="#8a2350">石塚計画デザイン事務所</text>
+  <rect x="665" y="110" width="150" height="80" rx="8" fill="#e2702b"/>
+  <text x="740" y="144" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">クロージング</text>
+  <text x="740" y="168" text-anchor="middle" font-size="12" fill="#ffffff">アンケート・次の案内</text>
+  <rect x="862" y="125" width="88" height="50" rx="25" fill="#2b2a28"/>
+  <text x="906" y="156" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff">退出</text>
+  <g stroke="#4a4540" stroke-width="2">
+    <line x1="185" y1="150" x2="251" y2="150" marker-end="url(#bar)"/>
+    <line x1="405" y1="150" x2="431" y2="150" marker-end="url(#bar)"/>
+    <line x1="635" y1="150" x2="661" y2="150" marker-end="url(#bar)"/>
+    <line x1="815" y1="150" x2="858" y2="150" marker-end="url(#bar)"/>
+  </g>
+</svg></div>
+  <div class="hint">スマホでは図を横にスクロールして見られます。各ステップの詳細は以下のとおりです。</div>
+
+  <div class="steps">
+    <div class="step"><div><span class="tag">勧誘</span><div class="place">テントの外</div></div><div><h3>1. ガリバー体験</h3><p>外のiPadチームが声をかけ、首から下げたgeoQRをiPadのtorinome Plannerで読み、その地点のまちを表示する。スケールを変えて、広域のまちを俯瞰したり、まちの中に立つ目線で見たりしてもらう。お気に入りの場所や駅、カワマチを探しながら、テントの中へ誘う。</p><div class="who">担当：外のiPadチーム</div></div></div>
+    <div class="step"><div><span class="tag">体験</span><div class="place">テント内 iPad</div></div><div><h3>2. まちなかに活動を置く</h3><p>Plannerで、マルシェやベンチ、遊び場などの活動イメージを好きな場所に配置する。「ここで何がしたい？」を形にする。</p><div class="who">担当：Planner係</div></div></div>
+  </div>
+  <div class="split">
+    <div class="kid"><b>子どもは2で遊び続ける</b>ガリバー体験と配置を好きなだけ。Planner係が見守り役を兼ねます。</div>
+    <div class="par"><b>保護者は3・4・5へ</b>子どもが遊んでいる間に、思い出のヒアリングとパネルアンケートへ進んでもらいます。</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div><span class="tag h">ヒアリング</span><div class="place">テント内 PC</div></div><div><h3>3. 昔の写真で思い出を語る</h3><p>torinome Baseで、京王電鉄広報部からお借りした昔の聖蹟桜ヶ丘の写真を見ながら、まちの思い出を聞く。聞いた話はその場でメモとして記録する。</p><div class="who">担当：Base係</div></div></div>
+    <div class="step"><div><span class="tag h">ヒアリング</span><div class="place">テント内 パネル</div></div><div><h3>4・5. パネルアンケート</h3><p>お気に入りの場所・ゆったりすごす場所のマップと、まちに欲しいもののキーワードにシールを貼ってもらう。</p><div class="who">担当：石塚計画デザイン事務所</div></div></div>
+    <div class="step"><div><span class="tag c">クロージング</span><div class="place">出口</div></div><div><h3>6. 種アンケートと次の接点づくり</h3><p>家族で合流したところで、「まちでやってみたいこと」と連絡先を種アンケートに書いてもらう。個別につながりたい人とはXで友だちに。PC・iPadの画面に出したQRでエリプラのサイトを案内し、かわぞいテラスはチラシを手渡しする。</p><div class="who">担当：出口係</div></div></div>
+  </div>
+  <div class="note">1だけで帰る人には、外のiPadチームがかわぞいテラスのチラシを渡し、iPad画面のQRからサイトを案内します。</div>
+</section>
+
+<!-- 03 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">03</span><h2>使う道具</h2></div>
+  <p class="lead">torinome（トライノーム）は、株式会社ホロラボが開発した、まちづくりの市民参加のためのシステムです。この日は、PCのBaseとiPadのPlannerの2つを使います。</p>
+  <p style="font-size:14px;margin:0 0 4px">協力：株式会社ホロラボ（<a href="https://hololab.co.jp/services/packages/torinome">https://hololab.co.jp/services/packages/torinome</a>）</p>
+  <div class="tools">
+    <div>
+      <div class="dev">PC・ブラウザ</div>
+      <h3>torinome Base</h3>
+      <div class="use">使う場面：3 ヒアリング</div>
+      <p>まちの3Dマップの上に、写真やメモなどのデータを置いて見るための母艦です。昔の写真もここに置いてあります。</p>
+      <p>来場者の思い出は、その場所にメモとして登録して残します。</p>
+    </div>
+    <div>
+      <div class="dev">iPad・アプリ</div>
+      <h3>torinome Planner</h3>
+      <div class="use">使う場面：1 勧誘、2 体験</div>
+      <p>Baseのデータを取り込み、iPadの画面の中でまちを手元に出す道具です。スケールを変えて、ガリバーのような俯瞰から、まちの中に立つ目線まで切り替えられます。</p>
+      <p>テント内では、Plannerカードを動かして活動のモデルを置きます。</p>
+    </div>
+  </div>
+  <div class="relation"><b>2つの関係</b><br>データはすべてBaseに準備しておき、PlannerはそこからiPadに取り込んで表示します。Baseでつくったまちを、Plannerで手元に持ち出すイメージです。</div>
+  <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/pCe67uVW8L4" title="torinome 紹介動画" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+  <p style="font-size:14px;margin:6px 0 0">YouTubeで見る：<a href="https://youtu.be/pCe67uVW8L4">https://youtu.be/pCe67uVW8L4</a></p>
+
+  <h3 style="font-size:17px;margin:24px 0 6px">外での体験はgeoQRで地点を切り替える</h3>
+  <p>開場前に、各iPadでトリマークを一度読み込んでおきます。その後は、外のiPadチームが首から下げたgeoQRを読むだけで、その地点のまちを表示できます。スケールを変えて、ブース周辺の様子に合わせた体験をしてもらいます。</p>
+  <p>geoQRは、3Dマップに置いてあるピンの地点（せいせきSC前、さくら通り、大栗川など）に合わせて複数用意しています。「お気に入りの場所はどこですか？」「見てみたい場所はありますか？」と聞いて、近い地点を出してください。</p>
+  <div class="note">アプリを再起動するとトリマークの読み直しが必要になるため、外のiPadチームもトリマークを1枚持っておきます。詳しい操作は、別紙の「スタッフ操作ガイド」（作成予定）にまとめます。</div>
+
+  <p style="margin:16px 0 0;font-size:14px;font-weight:700">公式マニュアル</p>
+  <ul class="links">
+    <li><a href="https://hololab.zendesk.com/hc/ja/articles/26982603038617-1-2-torinome-Base-%E7%94%BB%E9%9D%A2%E3%81%AE%E8%AA%AC%E6%98%8E">torinome Base 画面の説明</a></li>
+    <li><a href="https://hololab.zendesk.com/hc/ja/articles/31858623101977-5-2-torinome-Planner-%E7%94%BB%E9%9D%A2%E3%81%AE%E8%AA%AC%E6%98%8E">torinome Planner 画面の説明</a></li>
+    <li><a href="https://hololab.zendesk.com/hc/ja/articles/31678247163673-5-5-torinome-Planner-%E8%83%8C%E6%99%AF%E3%83%A2%E3%83%87%E3%83%AB-%E3%83%A2%E3%83%87%E3%83%AB%E3%82%92%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B">torinome Planner 背景モデル・モデルを表示する</a></li>
+  </ul>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">04</span><h2>クロージング先</h2></div>
+  <p class="lead">体験のあとに、ゆるく再会できる場を案内します。かわぞいテラスはチラシで、ほかはエリプラのサイトのQRから見てもらいます。相手に合いそうなものを、ひと言添えて勧めてください。</p>
+  <div class="dest">
+    <div class="p1">
+      <div class="d">11/13（金）18:00–20:00</div>
+      <h3>かわぞいテラス</h3>
+      <span class="how flyer">チラシを手渡し</span>
+      <div class="for">大人・保護者向け</div>
+      <p>大栗川沿い「くさびや」さん店舗前（関戸1-34-15）。予約不要・無料。準備会の活動の一環なので、準備会をそのまま体験してもらえます。思い出話が弾んだ人や、大栗川沿いに活動を置いた人に。</p>
+      <a href="https://seiseki.org/%e3%80%902026%e5%b9%b411%e6%9c%8813%e6%97%a5%ef%bc%88%e9%87%91%ef%bc%89%e9%96%8b%e5%82%ac%e3%80%91%e3%81%8b%e3%82%8f%e3%81%9e%e3%81%84%e3%83%86%e3%83%a9%e3%82%b9/">イベントページ（seiseki.org）</a>
+    </div>
+    <div class="p2">
+      <div class="d">11/23（月・祝）10:00–12:00</div>
+      <h3>エリマネ クリーンアクション</h3>
+      <span class="how site">サイトで案内</span>
+      <div class="for">子ども連れの家族向け</div>
+      <p>せいせきカワマチのキッチンカースペースに10時集合。ゴミ拾いと花苗の植え付け。誰でも参加でき、雨天中止。「今日遊んだこの場所で、また会いましょう」と誘えます。</p>
+      <a href="https://seiseki.org/%e3%80%902026%e5%b9%b411%e6%9c%8823%e6%97%a5%ef%bc%88%e6%9c%88%e3%83%bb%e7%a5%9d%ef%bc%89%e9%96%8b%e5%82%ac%e3%80%91%e8%81%96%e8%b9%9f%e6%a1%9c%e3%83%b6%e4%b8%98%e3%82%a8%e3%83%aa%e3%83%9e%e3%83%8d/">イベントページ（seiseki.org）</a>
+    </div>
+    <div class="p3">
+      <div class="d">11/23（月・祝）15:30–16:30｜申込締切 11/15</div>
+      <h3>せいせきカワマチツアー説明会</h3>
+      <span class="how site">サイトで案内</span>
+      <div class="for">カワマチで出店してみたい人向け</div>
+      <p>会場はRIVER PARK 聖蹟桜ヶ丘。団体でも個人でも出店者を募集中。クリーンアクションと同じ日なので、午前と午後をセットで案内できます。申込方法はエリマネのサイトで確認できます。</p>
+      <a href="https://seiseki.org/event">エリマネのイベント一覧（seiseki.org）</a>
+    </div>
+    <div class="p4">
+      <div class="d">11/28（土）15:30–17:30｜申込締切 11/15</div>
+      <h3>企画創出ワークショップ</h3>
+      <span class="how site">サイトで案内</span>
+      <div class="for">種アンケートに「やってみたい」を書いた人向け</div>
+      <p>カワマチでイベントを開きたい人がチームで企画から実施まで進めるワークショップ。参加無料。2027年GW頃までに実施できる人が対象で、企画を応援したい人も募集中。締切が近いので、その場で申し込みを勧めます。</p>
+      <a href="https://seiseki.org/news/%e3%80%902026%e5%b9%b411%e6%9c%8828%e6%97%a5%ef%bc%88%e5%9c%9f%ef%bc%89%e9%96%8b%e5%82%ac%e3%80%91%e4%bc%81%e7%94%bb%e5%89%b5%e5%87%ba%e3%83%af%e3%83%bc%e3%82%af%e3%82%b7%e3%83%a7%e3%83%83%e3%83%97/">お知らせページ（seiseki.org）</a>
+    </div>
+  </div>
+  <div class="note">PC・iPadに表示するQRの行き先：エリプラのウェブサイト（URL要確認）。各イベントの情報がそこから辿れることを事前に確認します。</div>
+</section>
+
+<!-- 04 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">05</span><h2>役割分担</h2></div>
+  <table class="resp">
+    <thead><tr><th>役割</th><th>やること</th><th>人数</th></tr></thead>
+    <tbody>
+      <tr><td data-l="役割"><b>外のiPadチーム</b></td><td data-l="やること">geoQRを首から下げて、テントの外で声をかけ、その場で1のガリバー体験。テントへ案内する。1だけで帰る人にはチラシとサイトQRを</td><td data-l="人数">2</td></tr>
+      <tr><td data-l="役割"><b>Planner係</b></td><td data-l="やること">2の活動配置をサポートし、配置したシーンを保存する。2に残る子どもの見守りも兼ねる</td><td data-l="人数">1</td></tr>
+      <tr><td data-l="役割"><b>Base係</b></td><td data-l="やること">PCで昔の写真を見せながら思い出を聞き、メモとして記録する</td><td data-l="人数">1</td></tr>
+      <tr><td data-l="役割"><b>出口係</b></td><td data-l="やること">種アンケートの記入をお願いし、Xでつながり、サイトQRとチラシで次のイベントを案内する。来場者と次の接点をつくる係</td><td data-l="人数">1</td></tr>
+      <tr><td data-l="役割"><b>全体・技術</b></td><td data-l="やること">武仙。トラブル対応、通信・電源の管理、手薄な係のカバー</td><td data-l="人数">1</td></tr>
+      <tr><td data-l="役割"><b>パネルアンケート</b></td><td data-l="やること">4・5のパネルを担当</td><td data-l="人数">石塚計画デザイン事務所</td></tr>
+    </tbody>
+  </table>
+  <div class="note">人が少ない時間帯は、外のiPadチームを1名にし、Base係と出口係を兼務します。</div>
+</section>
+
+<!-- 05 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">06</span><h2>タイムテーブルとシフト</h2></div>
+  <table class="resp">
+    <thead><tr><th>時間</th><th>内容</th><th>参加できる人（記入）</th></tr></thead>
+    <tbody>
+      <tr><td data-l="時間">前日まで</td><td data-l="内容">操作練習（30分程度、オンラインでも可）</td><td data-l="参加できる人" class="blank">—</td></tr>
+      <tr><td data-l="時間">9:00–10:00</td><td data-l="内容">設営、機材・通信チェック、QR表示の確認、役割確認</td><td data-l="参加できる人" class="blank">—</td></tr>
+      <tr><td data-l="時間">10:00–12:00</td><td data-l="内容">ブース（午前）</td><td data-l="参加できる人" class="blank">—</td></tr>
+      <tr><td data-l="時間">12:00–13:30</td><td data-l="内容">ブース（昼。交代で休憩）</td><td data-l="参加できる人" class="blank">—</td></tr>
+      <tr><td data-l="時間">13:30–15:30</td><td data-l="内容">ブース（午後）</td><td data-l="参加できる人" class="blank">—</td></tr>
+      <tr><td data-l="時間">15:30–</td><td data-l="内容">撤収</td><td data-l="参加できる人" class="blank">—</td></tr>
+      <tr><td data-l="時間">撤収後</td><td data-l="内容">打ち上げ</td><td data-l="参加できる人" class="blank">—</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 06 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">07</span><h2>声かけの例</h2></div>
+  <div class="talk">
+    <div><span class="s">外で声かけ</span>「聖蹟桜ヶ丘を3Dでいろんな目線から見られますよ。お気に入りの場所、見てみませんか？」</div>
+    <div><span class="s">ガリバー体験からテントへ</span>「中で、まちに好きなものを置けるんです。やってみません？」</div>
+    <div><span class="s">活動配置</span>「このまちで、こんなことがあったらいいな、を置いてみてください」</div>
+    <div><span class="s">保護者へ</span>「お子さんが遊んでいる間に、昔の聖蹟の写真、見てみませんか？」</div>
+    <div><span class="s">昔の写真</span>「この頃の聖蹟、覚えてますか？ 何か思い出あります？」</div>
+    <div><span class="s">種アンケート</span>「来年、まちを使って何かやりたい人を応援する場ができます。やってみたいことがあれば書いていってください」</div>
+    <div><span class="s">クロージング</span>「来週金曜の夜、大栗川沿いでかわぞいテラスをやります。ほかのイベントはこのQRから見られます」</div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">08</span><h2>種アンケート（案）</h2></div>
+  <p class="lead">出口で記入してもらう、取り組みの種を集めるためのアンケートです。</p>
+  <table class="resp">
+    <thead><tr><th>項目</th><th>ねらい</th></tr></thead>
+    <tbody>
+      <tr><td data-l="項目"><b>聖蹟桜ヶ丘で、やってみたいこと</b></td><td data-l="ねらい">取り組みの種そのもの</td></tr>
+      <tr><td data-l="項目"><b>やってみたい場所</b></td><td data-l="ねらい">カワマチ、駅前、大栗川などの使いたい公共空間の把握</td></tr>
+      <tr><td data-l="項目"><b>関わり方</b>（自分が中心でやりたい／手伝いたい／見てみたい）</td><td data-l="ねらい">関わり方の把握。「中心でやりたい」人には企画創出ワークショップを紹介</td></tr>
+      <tr><td data-l="項目"><b>お名前・連絡先</b>（メールまたはSNS）</td><td data-l="ねらい">正式発足時に声をかける</td></tr>
+      <tr><td data-l="項目"><b>準備会からの連絡を受け取ってよいか</b></td><td data-l="ねらい">連絡の同意を取る</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 08 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">09</span><h2>持ち物チェックリスト</h2></div>
+  <div class="cat">体験機材</div>
+  <ul class="check">
+    <li>iPad（外のiPadチーム用とPlanner用。台数要確認）</li>
+    <li>トリマーク（テント内用と、外のiPadチームの予備）</li>
+    <li>geoQR（地点ごと。カードリングにまとめ、首から下げられるように）</li>
+    <li>Plannerカード（活動のモデル用）</li>
+    <li>PC（torinome Base、昔の写真を登録済み）</li>
+    <li>PV再生用のモニターまたはiPad</li>
+    <li>ポータブル電源、モバイルバッテリー、ケーブル類</li>
+    <li>モバイルルーターまたはテザリング用スマホ</li>
+    <li>オフライン時の代替用の印刷マップ</li>
+  </ul>
+  <div class="cat">クロージング</div>
+  <ul class="check">
+    <li>種アンケート用紙、筆記具、クリップボード</li>
+    <li>エリプラのサイトのQR画像（PC・iPadに表示できる状態で）</li>
+    <li>かわぞいテラスのチラシ</li>
+    <li>X QR（運用方法を決めたら準備）</li>
+  </ul>
+  <div class="cat">ブース設営</div>
+  <ul class="check">
+    <li>机・椅子（主催の貸出を確認）</li>
+    <li>ブース名の看板・のぼり</li>
+    <li>日よけ対策（画面が見やすい配置）</li>
+    <li>重し・養生テープ（強風対策）</li>
+  </ul>
+</section>
+
+<!-- 09 -->
+<section>
+  <div class="sec-head"><span class="sec-no en">10</span><h2>未確定・相談したいこと</h2></div>
+  <div class="open">
+    <div><b>geoQRの読み取り</b>首から下げた縦向きの状態で安定して読めるか。屋外の日差しで反射しないか（マット加工のケースを検討）</div>
+    <div><b>スタッフ操作ガイド</b>Base・Plannerの当日の操作を別紙にまとめる</div>
+    <div><b>X QRの運用</b>スタッフ各自のアカウントにするか、準備会のアカウントを作るか（仲間内で相談中）</div>
+    <div><b>エリプラのサイトのURL</b>QRの行き先と、各イベントの情報がそこから辿れるかの確認</div>
+    <div><b>かわぞいテラスのチラシ</b>受け取り方法と部数</div>
+    <div><b>種アンケートの形式</b>紙のみか、フォーム併用か。項目の最終化</div>
+    <div><b>テントと設備</b>テントのサイズ、机・椅子の数、電源の有無を主催（聖蹟桜ヶ丘エリアマネジメント）に確認</div>
+    <div><b>通信</b>河川敷での回線状況。表示範囲の事前キャッシュ</div>
+    <div><b>昔の写真の扱い</b>会場での表示以外（来場者の撮影・SNS投稿）の可否を京王電鉄広報部に確認</div>
+    <div><b>撮影と記録の同意</b>ブースの様子の撮影、語りの記録を行う際の声かけ文面</div>
+    <div><b>雨天・強風時</b>中止判断の連絡ルート</div>
+  </div>
+</section>
+
+</div>
+
+<footer><div class="wrap">
+  聖蹟桜ヶ丘エリアプラットフォーム準備会｜せいせきカワマチ オープンデー出展企画（スタッフ向け）｜Draft v0.8｜作成：武仙<br>協力：株式会社ホロラボ（<a href="https://hololab.co.jp/services/packages/torinome">https://hololab.co.jp/services/packages/torinome</a>）
+</div></footer>
+
+</body>
+</html>
