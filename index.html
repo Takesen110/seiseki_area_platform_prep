@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>聖蹟桜ヶ丘を、3Dで語ろう｜カワマチオープンデー出展企画 v1.2</title>
+<title>聖蹟桜ヶ丘を、3Dで語ろう｜カワマチオープンデー出展企画 v1.3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
@@ -154,12 +154,39 @@ th{background:var(--accent-soft);font-weight:700;font-size:14px}
 .open div{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--pink);border-radius:8px;padding:10px 14px}
 .open b{display:block}
 
+.toc{margin:0 0 8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.toc h2{font-size:16px;margin:0 0 8px;color:var(--accent)}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 20px}
+.toc li{min-width:0}
+.toc a{display:flex;gap:10px;align-items:baseline;padding:5px 0;color:var(--ink);text-decoration:none;border-bottom:1px dashed var(--line)}
+.toc a:hover{color:var(--accent)}
+.toc .no{font-family:"Cormorant Garamond",serif;color:var(--accent);font-weight:700;min-width:22px}
+.toc .new{font-size:11px;font-weight:700;color:#fff;background:var(--pink);border-radius:999px;padding:0 8px;margin-left:auto;align-self:center}
+section[id]{scroll-margin-top:12px}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;background:var(--accent);color:#fff;text-decoration:none;font-size:13px;font-weight:700;border-radius:999px;padding:8px 14px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.faq-cat{font-weight:700;margin:24px 0 8px;font-size:15px;color:var(--accent)}
+.faq{display:grid;gap:8px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0 16px}
+.faq details[open]{border-color:var(--accent)}
+.faq summary{cursor:pointer;font-weight:700;padding:12px 0;list-style:none;display:grid;grid-template-columns:28px 1fr 16px;gap:6px;align-items:baseline}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q";font-family:"Cormorant Garamond",serif;color:var(--accent);font-size:20px;line-height:1}
+.faq summary::after{content:"+";color:var(--muted);text-align:right}
+.faq details[open] summary::after{content:"−"}
+.faq summary>*{min-width:0}
+.faq .a{padding:0 0 14px 34px;font-size:15px}
+.faq .a p{margin:0 0 8px}
+.faq .a p:last-child{margin-bottom:0}
+.faq .a ul{margin:0 0 8px;padding-left:20px}
+.faq .tip{font-size:13px;color:var(--muted);background:var(--sky-soft);border-radius:8px;padding:8px 12px}
+
 footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--muted)}
 
 @media (max-width:768px){
   .cover h1{font-size:32px}
   .cover-info{grid-template-columns:1fr 1fr}
   .check{columns:1}
+  .toc ol{grid-template-columns:1fr}
   .dest,.split,.tools,.qrs,.kz-imgs{grid-template-columns:1fr}
   strong,em,a,span,p,div,li,td,th{word-break:normal;overflow-wrap:break-word}
   .dest a{word-break:break-all}
@@ -176,13 +203,14 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
   .step{grid-template-columns:1fr;gap:6px}
   .glance .row{grid-template-columns:1fr;gap:2px}
   .sec-head h2{font-size:21px}
+  .faq .a{padding-left:0}
 }
 </style>
 </head>
 <body>
 
 <div class="cover"><div class="wrap">
-  <div class="ver en">Draft v1.2</div>
+  <div class="ver en">Draft v1.3</div>
   <div class="kicker">せいせきカワマチ オープンデー 出展企画｜スタッフ向け</div>
   <h1>聖蹟桜ヶ丘を、<br>3Dで語ろう。</h1>
   <p class="sub">3DデジタルマップとXR体験で、まちの魅力を語り合い、新しい友だちができる一日</p>
@@ -201,8 +229,24 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
   <div class="row"><div class="lab en">HOW</div><div>外で声をかけて体験に誘い、テント内で体験とヒアリング。出口でアンケートと次のイベントを案内</div></div>
 </div>
 
+<nav class="toc" id="toc" aria-label="目次">
+  <h2>目次</h2>
+  <ol>
+    <li><a href="#s01"><span class="no">01</span><span>この日やること</span></a></li>
+    <li><a href="#s02"><span class="no">02</span><span>ブースの流れ</span></a></li>
+    <li><a href="#s03"><span class="no">03</span><span>使う道具</span></a></li>
+    <li><a href="#s04"><span class="no">04</span><span>クロージング先</span></a></li>
+    <li><a href="#s05"><span class="no">05</span><span>役割分担</span></a></li>
+    <li><a href="#s06"><span class="no">06</span><span>タイムテーブルとシフト</span></a></li>
+    <li><a href="#s07"><span class="no">07</span><span>声かけの例</span></a></li>
+    <li><a href="#s08"><span class="no">08</span><span>アンケート</span></a></li>
+    <li><a href="#s09"><span class="no">09</span><span>持ち物チェックリスト</span></a></li>
+    <li><a href="#s10"><span class="no">10</span><span>よくある質問（FAQ）</span><span class="new">NEW</span></a></li>
+  </ol>
+</nav>
+
 <!-- 01 -->
-<section>
+<section id="s01">
   <div class="sec-head"><span class="sec-no en">01</span><h2>この日やること</h2></div>
   <div class="whatwedo">
     <h3>3Dを囲んで、まちのことを語り合い、新しい友だちをつくる</h3>
@@ -218,7 +262,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 02 -->
-<section>
+<section id="s02">
   <div class="sec-head"><span class="sec-no en">02</span><h2>ブースの流れ</h2></div>
   <p class="lead">外で勧誘し、テントの中で体験とヒアリング、出口でクロージングして退出してもらいます。ヒアリングの一部のパネルアンケートは、石塚計画デザイン事務所が担当します。</p>
   <div class="flow-scroll"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif">
@@ -274,7 +318,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 03 -->
-<section>
+<section id="s03">
   <div class="sec-head"><span class="sec-no en">03</span><h2>使う道具</h2></div>
   <p class="lead">torinome（トライノーム）は、株式会社ホロラボが開発した、まちづくりの市民参加のためのシステムです。この日は、PCのBaseとiPadのPlannerの2つを使います。</p>
   <p style="font-size:14px;margin:0 0 4px">協力：株式会社ホロラボ（<a href="https://hololab.co.jp/services/packages/torinome">https://hololab.co.jp/services/packages/torinome</a>）</p>
@@ -312,7 +356,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 04 -->
-<section>
+<section id="s04">
   <div class="sec-head"><span class="sec-no en">04</span><h2>クロージング先</h2></div>
   <div class="qrs">
     <div><h3>エリプラ準備会のnote</h3>
@@ -338,7 +382,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 04 -->
-<section>
+<section id="s05">
   <div class="sec-head"><span class="sec-no en">05</span><h2>役割分担</h2></div>
   <table class="resp">
     <thead><tr><th>役割</th><th>やること</th><th>人数</th></tr></thead>
@@ -355,7 +399,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 05 -->
-<section>
+<section id="s06">
   <div class="sec-head"><span class="sec-no en">06</span><h2>タイムテーブルとシフト</h2></div>
   <table class="resp">
     <thead><tr><th>時間</th><th>内容</th><th>参加できる人（記入）</th></tr></thead>
@@ -372,7 +416,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 06 -->
-<section>
+<section id="s07">
   <div class="sec-head"><span class="sec-no en">07</span><h2>声かけの例</h2></div>
   <div class="talk">
     <div><span class="s">外で声かけ</span>「聖蹟桜ヶ丘を3Dでいろんな目線から見られますよ。お気に入りの場所、見てみませんか？」</div>
@@ -386,7 +430,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 07 -->
-<section>
+<section id="s08">
   <div class="sec-head"><span class="sec-no en">08</span><h2>アンケート</h2></div>
   <p class="lead">Googleフォームで回答してもらいます。出口でQRを案内してください。</p>
   <table class="resp">
@@ -403,7 +447,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
 </section>
 
 <!-- 08 -->
-<section>
+<section id="s09">
   <div class="sec-head"><span class="sec-no en">09</span><h2>持ち物チェックリスト</h2></div>
   <div class="cat">機材</div>
   <ul class="check">
@@ -455,11 +499,56 @@ footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color
   </ul>
 </section>
 
+<!-- 10 -->
+<section id="s10">
+  <div class="sec-head"><span class="sec-no en">10</span><h2>よくある質問（FAQ）</h2></div>
+  <p class="lead">来場者から聞かれそうなことと、答え方の例です。質問をタップすると答えが開きます。自分の言葉で話してOKです。</p>
+  <div class="faq-cat">技術・体験について</div>
+  <div class="faq">
+    <details><summary><span>XRってなんですか？</span></summary><div class="a"><p>AR（拡張現実）、VR（仮想現実）、MR（複合現実）をまとめた呼び方です。現実の景色にCGを重ねたり、CGの世界に入り込んだりして、現実と仮想を行き来する技術の総称です。</p><p>今日は、iPadのカメラ越しにテーブルの上へ聖蹟桜ヶ丘のまちを出すARを体験してもらっています。</p></div></details>
+    <details><summary><span>iPadでARができるのはどういう仕組み？</span></summary><div class="a"><p>iPadはカメラ映像とモーションセンサーで、自分の位置や傾き、机などの平面を常に計算しています。その空間の中に3Dのまちを置くので、iPadを動かしても、まちがその場にあるように見えます。</p><p>今日はまず「トリマーク」という目印を読み込んで、まちを置く基準の位置を決めています。</p></div></details>
+    <details><summary><span>カードをどうやって認識しているの？</span></summary><div class="a"><p>カードごとに絵柄が違い、その絵柄を「画像マーカー」としてアプリに登録しています。iPadのカメラが絵柄の特徴的な点（模様の角や濃淡）を見つけると、どのカードがどこにどの向きで置かれているかを計算し、そのカードに紐づけた3Dモデルを表示します。カードを動かしたり回したりすると、モデルも一緒に動きます。</p><p class="tip">外のiPadチームが首から下げている「geoQR」は、読むと表示する地点が切り替わるQRコードです。</p></div></details>
+    <details><summary><span>デジタルツインとは？</span></summary><div class="a"><p>現実のまちや建物を、そっくりそのままデジタル空間に再現したもので、「デジタル上の双子」という意味です。</p><p>実際に工事やイベントをしなくても、「ここにベンチを置いたらどう見えるか」「洪水になったらどこまで水が来るか」などを、先に試したり話し合ったりできます。</p></div></details>
+    <details><summary><span>地図のデータは？</span></summary><div class="a"><p>主に <b>Google Photorealistic 3D Tiles</b> を使っています。Googleが航空写真などから作った、実写に近い3Dのまちのデータで、木や屋根の色まで再現されています。</p><p>あわせて、国土交通省の <b>PLATEAU（プラトー）</b> の3D都市モデルも使えます。PLATEAUは建物の用途や高さなどの情報を持っているのが特徴です。</p><p class="tip">「見た目のリアルさはGoogle、建物の情報はPLATEAU」と覚えておくと説明しやすいです。</p></div></details>
+    <details><summary><span>国土交通省 Project PLATEAUとは？</span></summary><div class="a"><p>国土交通省が2020年度から進めている、日本全国の3D都市モデルを整備し、オープンデータとして公開するプロジェクトです。整備は全国250以上の都市に広がっていて、防災、まちづくり、交通、エンタメなど、さまざまな分野で活用されています。</p><p><b>多摩市も整備済み</b>です。2025年度（令和7年度）に東京都が整備し、建物、道路、橋、植生、洪水浸水想定区域などのデータがあります。誰でも無料で、Webブラウザの「PLATEAU VIEW」で閲覧したり、データをダウンロードしたりできます。</p></div></details>
+    <details><summary><span>これ、自分のスマホでもできますか？</span></summary><div class="a"><p>torinome PlannerはiPad向けのアプリです。詳しくはtorinomeのパンフレットをご覧ください。</p></div></details>
+    <details><summary><span>自分の家も見られますか？</span></summary><div class="a"><p>見られます。ただ、今日は駅やカワマチ、お気に入りの場所を中心にご案内しています。</p></div></details>
+    <details><summary><span>3Dマップはどれくらい新しいの？</span></summary><div class="a"><p>Googleの3Dは撮影時期によって、数年前の状態のことがあります。工事中の場所などは、今の様子と違う場合があります。</p></div></details>
+    <details><summary><span>昔の写真はどこから？</span></summary><div class="a"><p>京王電鉄広報部からお借りした写真と、まちの有志から提供していただいた写真です。生活さんやたまいちさんなど、昔のまちの写真をたくさんお持ちの方がいて、提供していただきました。</p></div></details>
+  </div>
+  <div class="faq-cat">torinome・ホロラボについて</div>
+  <div class="faq">
+    <details><summary><span>torinome（トライノーム）とは？</span></summary><div class="a"><p>株式会社ホロラボが開発した、市民が参加するまちづくりのためのシステムです。今日は次の2つを使っています。</p><ul><li><b>torinome Base（PC）</b>：3Dマップに写真やメモを置いて見る「母艦」。昔の聖蹟の写真もここに置いてあります</li><li><b>torinome Planner（iPad）</b>：Baseのまちを手元に出して、カードで活動（マルシェ、ベンチ、遊び場など）を配置できます</li></ul><p>専門家だけでなく、住民のみなさんが3Dを囲んで「こうしたい」を話し合えるように作られています。</p></div></details>
+    <details><summary><span>ホロラボとは？</span></summary><div class="a"><p>2017年に設立された、五反田に本社があるテクノロジー企業です。XRや空間コンピューティングを専門に、Microsoft HoloLensなどのXRデバイスを使ったシステム開発や、3D都市モデルの活用に取り組んでいます。</p><p>torinomeはホロラボの自社サービスです。準備会メンバーの<b>武仙が経営に参加している会社</b>で、今日のブースには技術面で協力しています。</p><p class="tip">ホロラボの会社案内とtorinomeのパンフレットをブースに置いています。興味がある方には手渡ししてください。</p></div></details>
+    <details><summary><span>どのような実績がありますか？</span></summary><div class="a"><p>torinomeは、八王子市と南大沢の東京都立大学の協力のもと、国土交通省のプロジェクトの一部として開発されました。</p><p>その後、埼玉県狭山市、神奈川県藤沢市、札幌市などで、住民参加のまちづくりワークショップに活用されています。</p></div></details>
+    <details><summary><span>自治体や学校でも使えますか？</span></summary><div class="a"><p>使えます。ホロラボの会社案内とtorinomeのパンフレットをお渡しするので、そちらからお問い合わせください。</p></div></details>
+  </div>
+  <div class="faq-cat">準備会について</div>
+  <div class="faq">
+    <details><summary><span>聖蹟桜ヶ丘エリアプラットフォーム準備会とは？</span></summary><div class="a"><p>聖蹟桜ヶ丘で「まちを使って何かやってみたい」人を後押しするための集まりで、来年度の正式発足に向けて準備しています。住民や地域の事業者が中心になって、まちの未来を考え、実際に動いていく場です。</p><p>来週金曜（11/13）の夜には、大栗川沿いで「かわぞいテラス」を開きます。活動はnoteで発信しています。</p><p class="tip">「エリアプラットフォーム」は、国土交通省がウォーカブルなまちづくりの中で推奨している、官民が連携してまちを考える場の呼び方です。</p></div></details>
+    <details><summary><span>まちの窓口チームとは？</span></summary><div class="a"><p>準備会のコアメンバーの中でも、メディアや広報に関心のある安藤さん、島根さん、武仙の3名が中心になって発足した有志チームです。</p><p>MEETUP!やかわぞいテラスの企画運営、noteでの情報発信などをしています。</p></div></details>
+    <details><summary><span>みなさんはどういう人たちですか？</span></summary><div class="a"><p>聖蹟桜ヶ丘のまちが好きで、SNSなどを通じて出会った有志一同です。仕事というより「このまちをもっと楽しくしたい」という気持ちで集まっています。</p><p>今日は、パネルアンケートを担当する石塚計画デザイン事務所さんと、技術面で協力するホロラボも一緒に出ています。</p></div></details>
+    <details><summary><span>市役所の取り組みですか？</span></summary><div class="a"><p>多摩市も準備会のメンバーの一員として取り組んでいますが、あくまで住民や地域の事業者が主体の集まりです。</p></div></details>
+    <details><summary><span>準備会に参加するには？</span></summary><div class="a"><p>参加はいつでも歓迎です。まずは、かわぞいテラスに来たり、ほかのコアメンバーと知り合って話したりしてみてください。活動はnoteでも追いかけられます。</p></div></details>
+    <details><summary><span>次のイベントは？</span></summary><div class="a"><p>11/13（金）18:00–20:00に、大栗川沿いの「くさびや」さん店舗前（関戸1-34-15）で「かわぞいテラス」を開きます。予約不要・無料で、雨天中止です。</p></div></details>
+    <details><summary><span>今日置いたアイデアは実現するの？</span></summary><div class="a"><p>すぐに実現するわけではありませんが、準備会で話し合うタネになります。「やってみたい人」が見つかれば、一緒に形にしていきます。</p></div></details>
+  </div>
+  <div class="faq-cat">記録・個人情報について</div>
+  <div class="faq">
+    <details><summary><span>お金はかかりますか？</span></summary><div class="a"><p>今日の体験は無料です。</p></div></details>
+    <details><summary><span>写真や動画を撮っていますか？</span></summary><div class="a"><p>イベントの規約に従って撮影しています。使うのは顔が写らない写真で、公開する写真については、別途ご本人に許可をいただきます。</p></div></details>
+    <details><summary><span>話した思い出や置いたものはどうなるの？</span></summary><div class="a"><p>準備会のまちづくりの話し合いに使います。個人が特定される形では公開しません。</p></div></details>
+    <details><summary><span>アンケートに名前は必要？</span></summary><div class="a"><p>必須はニックネームだけで、お名前は任意です。</p></div></details>
+  </div>
+</section>
+
 </div>
 
 <footer><div class="wrap">
-  聖蹟桜ヶ丘エリアプラットフォーム準備会｜せいせきカワマチ オープンデー出展企画（スタッフ向け）｜Draft v1.2｜作成：武仙<br>協力：株式会社ホロラボ（<a href="https://hololab.co.jp/services/packages/torinome">https://hololab.co.jp/services/packages/torinome</a>）
+  聖蹟桜ヶ丘エリアプラットフォーム準備会｜せいせきカワマチ オープンデー出展企画（スタッフ向け）｜Draft v1.3｜作成：武仙<br>協力：株式会社ホロラボ（<a href="https://hololab.co.jp/services/packages/torinome">https://hololab.co.jp/services/packages/torinome</a>）
 </div></footer>
+
+<a class="totop" href="#toc">目次</a>
 
 </body>
 </html>
